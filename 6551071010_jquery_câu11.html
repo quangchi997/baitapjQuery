@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hiển thị tên và phần mở rộng file (jQuery)</title>
+
+    <!-- GẮN LINK JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+        margin-top: 80px;
+      }
+      input[type="file"] {
+        font-size: 16px;
+      }
+      #info {
+        margin-top: 20px;
+        font-size: 18px;
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Chọn file để hiển thị thông tin</h2>
+    <input type="file" id="fileInput" />
+
+    <div id="info"></div>
+
+    <script>
+      $(document).ready(function () {
+        $("#fileInput").change(function () {
+          let file = $(this).val().split("\\").pop(); // Lấy tên file
+          if (file) {
+            // Tách phần mở rộng (extension)
+            let parts = file.split(".");
+            let extension =
+              parts.length > 1 ? "." + parts.pop() : "Không có phần mở rộng";
+
+            // Hiển thị kết quả
+            $("#info").html(
+              "<b>Tên file:</b> " +
+                file +
+                "<br><b>Phần mở rộng:</b> " +
+                extension
+            );
+          } else {
+            $("#info").html("");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

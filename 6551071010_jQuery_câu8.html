@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Máy tính đơn giản</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        margin: 40px;
+        font-family: Arial;
+      }
+      input {
+        width: 60px;
+        text-align: center;
+        padding: 3px;
+      }
+      button {
+        width: 30px;
+        height: 30px;
+        margin: 2px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Chương trình máy tính</h3>
+    <input type="number" id="num1" value="12" />
+    <button class="op">+</button>
+    <button class="op">-</button>
+    <button class="op">x</button>
+    <button class="op">/</button>
+    <button class="op">^</button>
+    <input type="number" id="num2" value="14" />
+    =
+    <input type="text" id="result" readonly />
+
+    <script>
+      $(document).ready(function () {
+        $(".op").click(function () {
+          let n1 = parseFloat($("#num1").val());
+          let n2 = parseFloat($("#num2").val());
+          let op = $(this).text();
+          let result;
+
+          switch (op) {
+            case "+":
+              result = n1 + n2;
+              break;
+            case "-":
+              result = n1 - n2;
+              break;
+            case "x":
+              result = n1 * n2;
+              break;
+            case "/":
+              result = n2 !== 0 ? n1 / n2 : "Lỗi chia 0";
+              break;
+            case "^":
+              result = Math.pow(n1, n2);
+              break;
+            default:
+              result = "Sai phép toán";
+          }
+
+          $("#result").val(result);
+        });
+      });
+    </script>
+  </body>
+</html>

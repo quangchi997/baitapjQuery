@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hiển thị textbox theo lựa chọn (jQuery)</title>
+
+    <!-- GẮN LINK JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial;
+        margin: 50px;
+        line-height: 1.8;
+      }
+      .hidden {
+        display: none;
+      }
+      label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Thông tin cá nhân</h2>
+
+    <!-- Passport -->
+    <div>
+      <label>Bạn có Passport không?</label><br />
+      <input type="radio" name="passport" value="yes" /> Yes
+      <input type="radio" name="passport" value="no" /> No
+      <div id="passportInfo" class="hidden">
+        Nhập số Passport: <input type="text" id="passportText" />
+      </div>
+    </div>
+
+    <br />
+
+    <!-- Credit Card -->
+    <div>
+      <label>Bạn có Credit Card không?</label><br />
+      <input type="radio" name="credit" value="yes" /> Yes
+      <input type="radio" name="credit" value="no" /> No
+      <div id="creditInfo" class="hidden">
+        Nhập số thẻ: <input type="text" id="creditText" />
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Xử lý cho Passport
+        $("input[name='passport']").click(function () {
+          if ($(this).val() === "yes") {
+            $("#passportInfo").slideDown();
+          } else {
+            $("#passportInfo").slideUp();
+            $("#passportText").val("");
+          }
+        });
+
+        // Xử lý cho Credit Card
+        $("input[name='credit']").click(function () {
+          if ($(this).val() === "yes") {
+            $("#creditInfo").slideDown();
+          } else {
+            $("#creditInfo").slideUp();
+            $("#creditText").val("");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

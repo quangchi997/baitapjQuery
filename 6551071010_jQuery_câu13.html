@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hiển thị mật khẩu bằng jQuery</title>
+
+    <!-- GẮN LINK JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+        margin-top: 100px;
+      }
+      .password-box {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 6px;
+      }
+      input[type="password"],
+      input[type="text"] {
+        border: none;
+        outline: none;
+        font-size: 18px;
+      }
+      .eye {
+        cursor: pointer;
+        margin-left: 8px;
+        font-size: 20px;
+        color: #555;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Nhập mật khẩu của bạn</h2>
+
+    <div class="password-box">
+      <input type="password" id="password" placeholder="Nhập mật khẩu..." />
+      <!-- Icon con mắt -->
+      <span id="toggleEye" class="eye">👁️</span>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        let visible = false; // Trạng thái ẩn/hiện
+
+        $("#toggleEye").click(function () {
+          visible = !visible; // Đảo trạng thái
+
+          if (visible) {
+            $("#password").attr("type", "text"); // Hiện mật khẩu
+            $(this).text("🙈"); // Đổi icon
+          } else {
+            $("#password").attr("type", "password"); // Ẩn mật khẩu
+            $(this).text("👁️"); // Đổi lại icon
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

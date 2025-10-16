@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bài 15 - Tabs bằng jQuery</title>
+
+    <!-- GẮN LINK JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      /* --- KHUNG TỔNG --- */
+      .tab-container {
+        width: 500px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+      }
+
+      /* --- THANH TAB --- */
+      .tab-header {
+        background-color: #c6f17a; /* Màu xanh nhạt nền thanh tab */
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .tab-header div {
+        flex: 1;
+        padding: 10px;
+        cursor: pointer;
+        background-color: #4ba3d8;
+        color: white;
+        font-weight: bold;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .tab-header div:hover {
+        background-color: #2b87c6;
+      }
+
+      .tab-header .active {
+        background-color: white;
+        color: blue;
+        border-bottom: 2px solid white;
+      }
+
+      /* --- NỘI DUNG TAB --- */
+      .tab-content {
+        padding: 20px;
+        border-top: none;
+        background-color: white;
+        text-align: left;
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Hiệu ứng Tabs bằng jQuery</h2>
+
+    <div class="tab-container">
+      <div class="tab-header">
+        <div class="tab-link active" data-tab="tab1">THÔNG TIN CHÍNH</div>
+        <div class="tab-link" data-tab="tab2">HÌNH ẢNH</div>
+        <div class="tab-link" data-tab="tab3">SEO</div>
+      </div>
+
+      <div id="tab1" class="tab-content active">
+        <p>Tab thông tin chính</p>
+      </div>
+
+      <div id="tab2" class="tab-content">
+        <p>Nội dung hình ảnh</p>
+      </div>
+
+      <div id="tab3" class="tab-content">
+        <p>Thông tin SEO</p>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $(".tab-link").click(function () {
+          // Xóa active cũ
+          $(".tab-link").removeClass("active");
+          $(".tab-content").removeClass("active");
+
+          // Thêm active cho tab đang chọn
+          $(this).addClass("active");
+          $("#" + $(this).data("tab")).addClass("active");
+        });
+      });
+    </script>
+  </body>
+</html>

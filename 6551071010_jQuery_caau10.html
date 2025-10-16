@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Máy tính</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial;
+        margin-top: 50px;
+      }
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+      }
+      input[type="text"] {
+        width: 210px;
+        height: 40px;
+        font-size: 20px;
+        text-align: right;
+        margin-bottom: 10px;
+      }
+      button {
+        width: 50px;
+        height: 40px;
+        font-size: 18px;
+        margin: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Máy tính</h2>
+    <input type="text" id="screen" readonly />
+
+    <table>
+      <tr>
+        <td><button>7</button></td>
+        <td><button>8</button></td>
+        <td><button>9</button></td>
+        <td><button>/</button></td>
+      </tr>
+      <tr>
+        <td><button>4</button></td>
+        <td><button>5</button></td>
+        <td><button>6</button></td>
+        <td><button>*</button></td>
+      </tr>
+      <tr>
+        <td><button>1</button></td>
+        <td><button>2</button></td>
+        <td><button>3</button></td>
+        <td><button>-</button></td>
+      </tr>
+      <tr>
+        <td><button>0</button></td>
+        <td><button>.</button></td>
+        <td><button id="equal">=</button></td>
+        <td><button>+</button></td>
+      </tr>
+      <tr>
+        <td colspan="4"><button id="clear" style="width: 210px">C</button></td>
+      </tr>
+    </table>
+
+    <script>
+      $(document).ready(function () {
+        // Khi bấm các nút số / phép tính
+        $("button")
+          .not("#equal, #clear")
+          .click(function () {
+            let val = $(this).text();
+            $("#screen").val($("#screen").val() + val);
+          });
+
+        // Nút C: xóa màn hình
+        $("#clear").click(function () {
+          $("#screen").val("");
+        });
+
+        // Nút = : tính kết quả
+        $("#equal").click(function () {
+          let expr = $("#screen").val();
+          let regex = /^(-?\d+(\.\d+)?)([\+\-\*\/])(-?\d+(\.\d+)?)$/;
+
+          if (regex.test(expr)) {
+            try {
+              let result = eval(expr);
+              $("#screen").val(result);
+            } catch (e) {
+              alert("Biểu thức không hợp lệ!");
+            }
+          } else {
+            alert("Vui lòng nhập biểu thức hợp lệ! (ví dụ: 3+4, 6/2)");
+          }
+        });
+
+        // Cho phép nhập bằng bàn phím
+        $(document).keydown(function (e) {
+          let key = e.key;
+          if (/[0-9\+\-\*\/\.]/.test(key)) {
+            $("#screen").val($("#screen").val() + key);
+          } else if (key === "Enter") {
+            $("#equal").click();
+          } else if (key === "Escape") {
+            $("#clear").click();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
